@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "../state/TodoSlice";
+import { addTodo, removeTodo } from "../state/TodoSlice";
 import { RootState } from "../state/store";
 
 const todolist = () => {
@@ -13,6 +13,9 @@ const todolist = () => {
 			setNewTodo("");
 		}
 	};
+	const handleRemoveTodo = (todoId:number) =>{
+		dispatch(removeTodo(todoId))
+	}
 	const todos = useSelector((state: RootState) => state.todos);
 	return (
 		<>
@@ -28,7 +31,12 @@ const todolist = () => {
 				+
 			</button>
 			<ol>
-				{todos.map((task,index)=>(<li key={index}>{task.text}</li>))}
+				{todos.map((task, index) => (
+					<div className="todos"key={index}>
+						<li>{task.text}</li>
+						<button onClick={()=>handleRemoveTodo(task.id)}>Remove</button>
+					</div>
+				))}
 			</ol>
 		</>
 	);
