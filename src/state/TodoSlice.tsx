@@ -21,6 +21,7 @@ const todoSlice = createSlice({
 				text: action.payload,
 				completed: false,
 			});
+			
 		},
 		removeTodo:(state,action:PayloadAction<number>)=>{
 			state.todos=
